@@ -5,7 +5,7 @@ CATLOCK / PRIVACY
 Provider: SEAL
 Contact: [sealluo81@gmail.com](mailto:sealluo81@gmail.com)
 Effective date: November 3, 2026
-Last updated: November 4, 2026
+Last updated: November 20, 2026
 
 ## Scope
 
@@ -15,15 +15,17 @@ This policy describes information handled by the CatLock macOS app and through s
 
 CatLock does not require an app account. It includes no advertising, tracking, or third-party analytics SDKs, and has no feature that sends usage data to a developer server.
 
-Your cat name, selected appearance, interface preferences, auto-unlock settings, and onboarding status are stored in local macOS preferences. A custom unlock phrase is stored in macOS Keychain and is also used in memory while the app runs. CatLock provides no cloud sync service. System backup, device migration, and other services you use may process local data under their own settings.
+Your cat name, selected appearance, interface preferences, lock mode, auto-unlock settings, and onboarding status are stored in local macOS preferences. A custom unlock phrase is stored in macOS Keychain and is also used in memory while the app runs. CatLock provides no cloud sync service. System backup, device migration, and other services you use may process local data under their own settings.
 
-## Accessibility permission and keyboard events
+## Lock modes, permissions, and keyboard events
 
-CatLock requires macOS Accessibility permission to suppress keyboard input in other apps while protection is enabled. The keyboard event listener used for protection is created when you turn protection on and removed when you turn it off.
+Starting with version 1.0 Build 3, default locking requires neither Accessibility nor Input Monitoring permission. A transparent overlay handles keyboard and mouse events sent to CatLock’s own windows so ordinary input does not reach underlying apps. This mode does not create a global keyboard event tap.
+
+“Allow mouse use while locked”, under Settings → Protection & Unlock → Additional options, is off by default. It is available only after the user enables it and grants Accessibility permission. While locked, this mode blocks keyboard input in other apps while allowing mouse interaction. Its keyboard event listener is created only when locking in this mode and removed on unlock. Earlier Build 2 used this permission-based approach for keyboard protection.
 
 During protection, the app temporarily processes key input in memory to detect your unlock phrase. It does not create or save a keystroke log or upload key input to the developer. The matching buffer is cleared on unlock, input reset, or matching timeout. Text entered directly into CatLock, such as a cat name or unlock phrase, is processed for that feature.
 
-You can revoke permission in System Settings → Privacy & Security → Accessibility. Without permission, global keyboard protection is unavailable. You can also stop interception by turning protection off in the app.
+You can revoke permission in System Settings → Privacy & Security → Accessibility. Without permission, the optional mouse mode is unavailable, but default locking remains available. You can stop protection by typing your unlock phrase or holding the cat for 3 seconds.
 
 ## Support email
 
@@ -58,7 +60,7 @@ CATLOCK / PRIVACY
 服务提供者：SEAL
 联系邮箱：[sealluo81@gmail.com](mailto:sealluo81@gmail.com)
 生效日期：2026 年 11 月 3 日
-更新日期：2026 年 11 月 4 日
+更新日期：2026 年 11 月 20 日
 
 ## 适用范围
 
@@ -68,15 +70,17 @@ CATLOCK / PRIVACY
 
 CatLock 无需注册应用账号。应用未集成广告、跟踪或第三方分析 SDK，也没有向开发者服务器发送使用数据的功能。
 
-猫咪名字、所选外观、界面偏好、自动解除保护设置及新手引导状态，保存在本机 macOS 偏好设置中。自定义解锁口令保存在本机 macOS 钥匙串中；应用运行期间也会在内存中使用该口令完成匹配。CatLock 不提供自己的云同步功能。你使用的系统备份、设备迁移或其他系统服务可能按各自设置处理本机数据。
+猫咪名字、所选外观、界面偏好、锁定模式、自动解除保护设置及新手引导状态，保存在本机 macOS 偏好设置中。自定义解锁口令保存在本机 macOS 钥匙串中；应用运行期间也会在内存中使用该口令完成匹配。CatLock 不提供自己的云同步功能。你使用的系统备份、设备迁移或其他系统服务可能按各自设置处理本机数据。
 
-## 辅助功能权限与键盘事件
+## 锁定模式、权限与键盘事件
 
-CatLock 需要 macOS“辅助功能”权限才能在保护开启时拦截其他应用的键盘输入。只有你开启保护后，应用才创建用于拦截的键盘事件监听；关闭保护时会移除它。
+从 1.0 Build 3 起，默认锁定无需辅助功能或输入监控权限。应用通过透明覆盖窗口处理发送给 CatLock 自己的按键和鼠标事件，使普通输入不会传到下方应用；默认模式不创建全局键盘拦截监听。
+
+“设置 → 保护与解锁 → 附加选项”中的“锁定时允许使用鼠标”默认关闭。只有用户主动开启并授予辅助功能权限后，此模式才可在锁定期间拦截其他应用的键盘输入，同时保留鼠标操作。用于拦截的键盘事件监听只在该模式锁定时创建，解锁时移除。此前的 Build 2 使用这一授权方式进行键盘保护。
 
 保护期间，应用在内存中临时处理按键，以判断是否输入了解锁口令。它不会建立或保存按键日志，也不会把按键内容上传给开发者。匹配缓冲区会在解锁、输入重置或匹配超时后清空。猫咪取名、设置口令等应用内输入会按对应功能正常处理。
 
-你可在“系统设置 → 隐私与安全性 → 辅助功能”撤销 CatLock 的授权。撤销后，全局键盘保护功能将无法使用。也可随时通过应用的解除保护操作停止拦截。
+你可在“系统设置 → 隐私与安全性 → 辅助功能”撤销 CatLock 的授权。撤销后，可选鼠标模式将无法使用，默认免权限锁定仍可用。也可通过输入解锁口令或按住猫咪 3 秒停止保护。
 
 ## 客服邮件
 
@@ -101,7 +105,3 @@ CatLock 本身没有集成自动诊断上传服务。Apple 的系统诊断与 Ap
 ## 本网站的访问
 
 本支持文档及隐私政策通过 GitHub 提供，网页版本使用 GitHub Pages。为传送内容和保障服务安全，GitHub 可能处理 IP 地址、浏览器信息及访问请求等技术数据，其处理同时受 GitHub 的相关服务及隐私政策约束。我们未在页面中添加广告、分析脚本、第三方字体或联系表单；点击邮箱链接会打开你自行使用的邮件服务。应用本身的数据处理方式与访问本网站不同。
-
----
-
-[Back to support / 返回使用帮助](README.md)
